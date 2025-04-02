@@ -1,3 +1,7 @@
+This is a fork of [Shadowspaz' NIAutoclicker](https://github.com/Shadowspaz/NIAutoclicker)
+
+I've added **Alt+=** as a new shortcut to reset the autoclicker. This makes it easier to set a new click location. Simply hit **Alt+=** to reset, then toggle it back on as per usual (Alt+Backspace) and it'll ask for a new click location.
+
 # NIAutoclicker
 ##### Autoclicks in the background, giving you full control of your own mouse to do whatever else you want! #####
 ---
@@ -10,6 +14,8 @@ Also included is the raw .ahk file, also viewable at http://pastebin.com/yLJEbMx
 
 ### How To Use ###
 **Alt + Backspace** -- Toggle autoclicker
+
+**Alt + =** -- Resets the autoclicker (and lets you easily pick a new click location by toggling it on again)
 
 **Alt + -** -- Open options window
 

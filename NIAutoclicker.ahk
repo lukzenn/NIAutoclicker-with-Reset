@@ -31,7 +31,7 @@ setTimer, setTip, 5
 TTStart = %A_TickCount%
 while (A_TickCount - TTStart < 5000 && !toggle)
 {
-  TooltipMsg = Press (Alt + Backspace) to toggle autoclicker `n Press (Alt + Dash(-)) for options
+  TooltipMsg = Press (Alt + Backspace) to toggle autoclicker `n Press (Alt + =) to reset click location `n Press (Alt + Dash(-)) for options
 }
   TooltipMsg =
 
@@ -76,6 +76,7 @@ while (A_TickCount - TTStart < 5000 && !toggle)
     WinActivate, NIAC Settings
 return
 
+
 ActEdit1:
   GuiControl, Enable, tempRateCPS
   GuiControl, Disable, tempRateSPC
@@ -91,13 +92,17 @@ ActEdit2:
 return
 
 Reset:
+  GoSub, ResetClicks
+  GuiControl, Disable, Reset
+  Gui, Font, s8
+  Gui, Add, Text, x54 y145, Click locations reset.
+return
+
+ResetClicks:
   toggle := false
   actWin :=
   setTimer, autoClick, off
   currentClick := 1
-  GuiControl, Disable, Reset
-  Gui, Font, s8
-  Gui, Add, Text, x54 y145, Click locations reset.
 return
 
 SetVal:
@@ -112,6 +117,7 @@ SetVal:
     actWin :=
     setTimer, autoClick, off
   }
+
 GuiClose:
   if toggle
   {
@@ -168,6 +174,16 @@ return
        TooltipMsg = ##Autoclick disabled.
        setTimer, autoclick, off
     }
+  }
+return
+
+!=::
+  IfWinNotExist, NIAC Settings
+  {
+       GoSub, ResetClicks
+       setTimer, setTip, 5
+       TTStart = %A_TickCount%
+       TooltipMsg = ##Autoclicker reset
   }
 return
 
@@ -241,3 +257,4 @@ EmptyMem()
   DllCall("SetProcessWorkingSetSize", "UInt", h, "Int", -1, "Int", -1)
   DllCall("CloseHandle", "Int", h)
 }
+
